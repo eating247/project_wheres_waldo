@@ -17,9 +17,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.img-container img{
-  width: 100%;
+.img-container {
   border: 5px solid black;
+}
+
+img {
+  width: 100%;
 }
 
 .target {
@@ -64,4 +67,12 @@
   left: 55px;
   top: -3px;
   cursor: pointer;
+}
+
+.scores {
+  margin-bottom: 20px;
+}
+
+.over {
+  color: red;
 }

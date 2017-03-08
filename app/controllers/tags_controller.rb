@@ -1,12 +1,12 @@
 class TagsController < ApplicationController
 
-  def index
-    @tags = Tag.all
-    respond_to do |format|
-      format.html
-      format.json { render :json => @tags, :status => 201 }
-    end
-  end
+  # def index
+  #   @tags = Tag.all
+  #   respond_to do |format|
+  #     format.html
+  #     format.json { render :json => @tags, :status => 201 }
+  #   end
+  # end
 
   def create
     @tag = Tag.new(tag_params)

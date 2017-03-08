@@ -3,7 +3,7 @@ var APP = APP || {};
 APP.PhotoTagging = (function(){
 
   var init = function() {
-    loadTags();
+    // loadTags();
     setListeners();
   }
 
@@ -12,23 +12,23 @@ APP.PhotoTagging = (function(){
     return ($delete);
   }
 
-  var loadTags = function() {
-    $.ajax({
-      method: "GET",
-      url: 'tags',
-      dataType: 'json',
-      success: function(data) { renderTags(data) }
-    });
-  }
+  // var loadTags = function() {
+  //   $.ajax({
+  //     method: "GET",
+  //     url: 'tags',
+  //     dataType: 'json',
+  //     success: function(data) { renderTags(data) }
+  //   });
+  // }
 
-  var renderTags = function(data) {
-    data.forEach(function(tag) {
-      $tag = $('<div></div>').addClass('tag').text(tag.value);
-      $tag.offset({top: tag.top, left: tag.left});
-      $tag.append(getDelete(tag.id));
-      $('.img-container').append($tag);
-    });
-  }
+  // var renderTags = function(data) {
+  //   data.forEach(function(tag) {
+  //     $tag = $('<div></div>').addClass('tag').text(tag.value);
+  //     $tag.offset({top: tag.top, left: tag.left});
+  //     $tag.append(getDelete(tag.id));
+  //     $('.img-container').append($tag);
+  //   });
+  // }
 
   var setListeners = function() {
     $('.img-container').on('click', 'img', function(e) {
@@ -60,6 +60,10 @@ APP.PhotoTagging = (function(){
     });
   }
 
+  var offListeners = function() {
+    $( document ).off();
+  }
+
   var deleteTag = function(target) {
     var id = $(target).attr('data-id');
     var tag = $(target).parent();
@@ -76,6 +80,7 @@ APP.PhotoTagging = (function(){
     var offset = $('.target').offset();
     saveTag(value, offset);
     $('.target').addClass('tag').removeClass('target').text(value);
+    APP.Game.decreaseScore();
   }
 
   var saveTag = function(value, offset) {
@@ -84,7 +89,6 @@ APP.PhotoTagging = (function(){
       top: offset.top,
       left: offset.left
     }
-
     $.ajax({
       url: 'tags',
       method: 'POST',
@@ -127,8 +131,3 @@ APP.PhotoTagging = (function(){
   }
 
 })();
-
-
-$( document ).ready( function() {
-  APP.PhotoTagging.init();
-} );
